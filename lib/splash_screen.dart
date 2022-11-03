@@ -16,7 +16,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen())));
+            context, MaterialPageRoute(builder: (context) => HomePage())));
   }
 
   @override
