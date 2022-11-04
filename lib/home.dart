@@ -1,6 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:gohomestay/homestaydetail.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'homestay.dart';
+import 'homestaydetail.dart';
 
 class HomePage extends StatefulWidget
 {
@@ -28,13 +31,13 @@ class _HomePageState extends State<HomePage>
       (
       padding: const EdgeInsets.all
       (
-        25.0
+        10.0
       ),
       child: Column
       (
         children:<Widget>
         [
-        Image(image:AssetImage(homestay.imgUrl)),
+        Image(image:AssetImage(homestay.thumbnailUrl)),
         const SizedBox(height: 10.0, width: 15.0,),
         Text
         (
@@ -58,8 +61,7 @@ class _HomePageState extends State<HomePage>
         ),
         Text
         (
-          
-          (homestay.listingPrice).toString(),
+          'RM ${homestay.listingPrice}',
           style:const TextStyle
           (
             fontSize: 14.0,
@@ -79,35 +81,62 @@ class _HomePageState extends State<HomePage>
     return Scaffold
     (
       appBar: AppBar
-      (
-        backgroundColor: Colors.white,
-        leading: IconButton
+      ( 
+        centerTitle: true,
+        title: SizedBox
         (
-          onPressed: () {},
-          icon: Image.asset('assets/loading.png'),
+          width: 40,
+          child: Image.asset('assets/loading.png'),
         ),
+        bottom: const PreferredSize
+        (
+          preferredSize: Size.zero,
+          child: Text
+          (
+            "Homestay Listing",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        toolbarHeight: 60.2,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder
+        (
+          borderRadius: BorderRadius.only
+          (
+            bottomRight: Radius.circular(5),
+            bottomLeft: Radius.circular(5)
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
+      
       body: SafeArea
       (
-        child: ListView.builder
-        (
-          itemCount: Homestay.listings.length,
-          itemBuilder: (BuildContext context, int index)
-          {
-            return GestureDetector
+            child: ListView.builder
             (
-              // onTap:() 
-              // {
-              //   Navigator.push(context, MaterialPageRoute(builder: (context)
-              //   {
-                  
-              //   }
-              // },
-              child: buildHomeStay(Homestay.listings[index]),
-            );           
-          },
-        ),
-      ),
-    );
+              itemCount: Homestay.listings.length,
+              itemBuilder: (BuildContext context, int index)
+              {
+                return GestureDetector
+                (
+                  onTap:() 
+                  {
+                    Navigator.push
+                    (
+                      context, MaterialPageRoute
+                      (
+                        builder: (context)
+                        {
+                          return HomeDetail(homestay: Homestay.listings[index]);
+                        }
+                      )
+                    );
+                  },
+                  child: buildHomeStay(Homestay.listings[index]),
+                );           
+              },
+            ),
+        ), 
+      ); 
   }
 }
