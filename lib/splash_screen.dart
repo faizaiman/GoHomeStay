@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gohomestay/home.dart';
+import 'package:gohomestay/input.dart';
 
 class LoadingScreen extends StatefulWidget {
   LoadingScreen({Key? key}) : super(key: key);
