@@ -118,12 +118,22 @@ class _HomeDetailState extends State<HomeDetail>
                 fontFamily: 'GoogleFonts.lato()',
               ),
             ),
-            // ElevatedButton
-            // (
-            //   onPressed: onPressed, 
-            //   child: child
-            // ),
+            ElevatedButton
+            (
+              onPressed:() 
+                  {
+                    Navigator.push
+                    (
+                      context, MaterialPageRoute
+                      (
+                        builder: (context) => 
+                      
+                      )
+                    );
+                  }, 
+            ),
           ],
+          
         )
       )
     );
