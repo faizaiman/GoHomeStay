@@ -111,6 +111,13 @@ class _UserInput extends State<UserInput> {
                     validator: (val) => val!.isEmpty ? "Required" : null,
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    "Homestay Details",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () {
                     if (!_formKey.currentState!.validate()) {
