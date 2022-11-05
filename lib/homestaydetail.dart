@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gohomestay/input.dart';
 import 'homestay.dart';
 
 class HomeDetail extends StatefulWidget
@@ -41,7 +42,7 @@ class _HomeDetailState extends State<HomeDetail>
           child: Text
           (
             "Homestay Detail",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 13),
           ),
         ),
         toolbarHeight: 60.2,
@@ -64,12 +65,22 @@ class _HomeDetailState extends State<HomeDetail>
           children: 
           // <Widget>
           [
+            Text
+            (
+              widget.homestay.listingName,
+              style: const TextStyle
+              (
+                fontSize: 30.0,
+                fontWeight: FontWeight.w700, 
+                fontFamily: 'GoogleFonts.lato()',
+              ),
+            ),
             CarouselSlider
             (
               carouselController: buttonCarouselController,
               options: CarouselOptions
               (
-                height: 400
+                height: 300
               ),
               items: 
               [    
@@ -90,16 +101,6 @@ class _HomeDetailState extends State<HomeDetail>
             // ),
             Text
             (
-              widget.homestay.listingName,
-              style: const TextStyle
-              (
-                fontSize: 20.0,
-                fontWeight: FontWeight.w700, 
-                fontFamily: 'GoogleFonts.lato()',
-              ),
-            ),
-            Text
-            (
               widget.homestay.listingAddress,
               style: const TextStyle
               (
@@ -118,6 +119,16 @@ class _HomeDetailState extends State<HomeDetail>
                 fontFamily: 'GoogleFonts.lato()',
               ),
             ),
+            Text
+            (
+              'Enter discount code: ${widget.homestay.discountCode}',
+              style: const TextStyle
+              (
+                fontSize:16,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'GoogleFonts.lato()',
+              ),
+            ),
             ElevatedButton
             (
               onPressed:() 
@@ -126,11 +137,14 @@ class _HomeDetailState extends State<HomeDetail>
                     (
                       context, MaterialPageRoute
                       (
-                        builder: (context) => 
-                      
+                        builder: (context) 
+                        {
+                          return UserInput(homestay: widget.homestay);
+                        }
                       )
                     );
                   }, 
+                child: const Text('Next'),
             ),
           ],
           
@@ -138,6 +152,4 @@ class _HomeDetailState extends State<HomeDetail>
       )
     );
   }
-  
- // RaisedButton({required Future<void> Function() onPressed, required Text child}) {return}
 }

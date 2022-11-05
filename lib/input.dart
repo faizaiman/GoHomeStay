@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:gohomestay/homestay.dart';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'homestaydetail.dart';
+import 'checkout.dart';
 
 class UserInput extends StatefulWidget {
+  final Homestay homestay;
+  const UserInput({Key? key, required this.homestay}):super(key: key);
   @override
   _UserInput createState() => _UserInput();
 }
@@ -12,7 +17,6 @@ class _UserInput extends State<UserInput> {
   final _formKey = GlobalKey<FormState>();
   final FullName = TextEditingController();
   final dateInput = TextEditingController();
-
   @override
   void initState() {
     dateInput.text = ""; //set the initial value of text field
@@ -117,6 +121,16 @@ class _UserInput extends State<UserInput> {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(const SnackBar(content: Text("Error")));
                     }
+                    Navigator.push
+                    (
+                      context, MaterialPageRoute
+                      (
+                        builder: (context) 
+                        {
+                          return CheckoutPage(homestay: widget.homestay);
+                        }
+                      )
+                    );
                   },
                   child: const Text("Submit"),
                 ),

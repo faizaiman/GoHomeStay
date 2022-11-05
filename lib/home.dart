@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage>
         ),
         Text
         (
-          'RM ${homestay.listingPrice}',
+          'RM ${homestay.listingPrice} Per Night',
           style:const TextStyle
           (
             fontSize: 14.0,
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage>
           child: Text
           (
             "Homestay Listing",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 13),
           ),
         ),
         toolbarHeight: 60.2,
@@ -119,6 +119,7 @@ class _HomePageState extends State<HomePage>
               {
                 return GestureDetector
                 (
+                  child: buildHomeStay(Homestay.listings[index]),
                   onTap:() 
                   {
                     Navigator.push
@@ -132,7 +133,6 @@ class _HomePageState extends State<HomePage>
                       )
                     );
                   },
-                  child: buildHomeStay(Homestay.listings[index]),
                 );           
               },
             ),
