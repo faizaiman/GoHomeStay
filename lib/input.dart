@@ -184,7 +184,13 @@ class _UserInput extends State<UserInput> {
                     }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                        return CheckoutPage(homestay: widget.homestay, widget.);
+                      return CheckoutPage(
+                        homestay: widget.homestay,
+                        fullName: FullName.text,
+                        dateCheckin: dateCheckin.text,
+                        dateDeparture: dateDepature.text,
+                        numGuest: numGuest.text,
+                      );
                     }));
                   },
                   style: ElevatedButton.styleFrom(
