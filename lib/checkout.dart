@@ -11,7 +11,7 @@ class CheckoutPage extends StatefulWidget {
   final Homestay homestay;
   final String fullName;
   final String dateDeparture;
-  final  dateCheckin;
+  final String dateCheckin;
   final String numGuest;
   const CheckoutPage(
       {Key? key,
@@ -29,9 +29,7 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   int _sliderVal = 1;
-  final _formKey = GlobalKey<FormState>();
   int finalPrice = 0;
-  final Discount = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +71,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image(
                     image: AssetImage(widget.homestay.thumbnailUrl),
-                    height: 150,
+                    height: 130,
                   ),
                 ),
               ],
@@ -107,7 +105,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                 ),
                 Text(
-                  widget.dateCheckin,
+                  'Type of property: ${widget.homestay.typeOfProperty}',
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 13.0,
@@ -116,11 +114,38 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                 ),
                 Text(
-                  widget.dateDeparture,
+                  'Capacity: ${widget.homestay.capacity}',
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 13.0,
                     fontWeight: FontWeight.w300,
+                    fontFamily: 'GoogleFonts.lato()',
+                  ),
+                ),
+                Text(
+                  'Check in: ${widget.dateCheckin}',
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'GoogleFonts.lato()',
+                  ),
+                ),
+                Text(
+                  'Check out: ${widget.dateDeparture}',
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'GoogleFonts.lato()',
+                  ),
+                ),
+                Text(
+                  'Pick number of nights',
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w600,
                     fontFamily: 'GoogleFonts.lato()',
                   ),
                 ),
@@ -145,6 +170,34 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     fontFamily: 'GoogleFonts.lato()',
                   ),
                 ),
+
+                Text(
+                  'Price after discount: RM ${(finalPrice * widget.homestay.listingPrice) * 0.5}',
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'GoogleFonts.lato()',
+                  ),
+                ),
+                // TextField(
+                //   controller: Discount,
+                //   decoration: InputDecoration(
+                //     labelText: "Enter Discount Code",
+                //     errorText: _errorText,
+                //     border: UnderlineInputBorder(
+                //         borderRadius: BorderRadius.circular(5.0)),
+                //   ),
+                // )
+                // Form(
+                //   child: TextFormField(
+                //       controller: Discount,
+                //       decoration: InputDecoration(
+                //         labelText: "Insert Discount Code",
+                //         border: UnderlineInputBorder(
+                //           borderRadius: BorderRadius.circular(5.0),
+                //         ),
+                //       )),
+                // ),
               ],
             ),
           ],

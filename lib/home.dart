@@ -12,40 +12,62 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Widget buildHomeStay(Homestay homestay) {
-    return Center(
-        child: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: 4,
+    return Card(
+      elevation: 1.5,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
         child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Image(
-                image: AssetImage(homestay.thumbnailUrl),
-                height: 250,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.fill,
+          children: <Widget>[
+            Image(image: AssetImage(homestay.thumbnailUrl)),
+            const SizedBox(
+              height: 10.0,
+              width: 15.0,
+            ),
+            Text(
+              homestay.listingName,
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'GoogleFonts.lato()',
               ),
             ),
-            ListTile(
-              title: Text(
-                homestay.listingName,
-                style: TextStyle(fontSize: 16),
+            Text(
+              homestay.listingAddress,
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'GoogleFonts.lato()',
               ),
-              trailing: Text(
-                homestay.listingAddress,
-                style: TextStyle(fontSize: 10),
+            ),
+            Text(
+              'RM ${homestay.listingPrice} Per Night',
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'GoogleFonts.lato()',
               ),
-            )
+            ),
+            Text(
+              'Type of property: ${homestay.typeOfProperty}',
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'GoogleFonts.lato()',
+              ),
+            ),
+            Text(
+              'Capacity: ${(homestay.capacity).toString()}',
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'GoogleFonts.lato()',
+              ),
+            ),
           ],
         ),
       ),
-    ));
+    );
   }
 
   @override
@@ -78,17 +100,12 @@ class _HomePageState extends State<HomePage> {
           itemCount: Homestay.listings.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return HomeDetail(homestay: Homestay.listings[index]);
-                    },
-                  ),
-                );
-              },
               child: buildHomeStay(Homestay.listings[index]),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HomeDetail(homestay: Homestay.listings[index]);
+                }));
+              },
             );
           },
         ),
