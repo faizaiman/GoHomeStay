@@ -181,20 +181,23 @@ class _UserInput extends State<UserInput> {
                     if (!_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(const SnackBar(content: Text("Error")));
+                    } else {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CheckoutPage(
+                          homestay: widget.homestay,
+                          fullName: FullName.text,
+                          dateCheckin: dateCheckin.text,
+                          dateDeparture: dateDepature.text,
+                          numGuest: numGuest.text,
+                        );
+                      }));
                     }
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CheckoutPage(
-                        homestay: widget.homestay,
-                        fullName: FullName.text,
-                        dateCheckin: dateCheckin.text,
-                        dateDeparture: dateDepature.text,
-                        numGuest: numGuest.text,
-                      );
-                    }));
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF78ffd6)),
+                  style: ElevatedButton.styleFrom
+                  (
+                      backgroundColor: Color(0xFF78ffd6)
+                  ),
                   child: const Text(
                     "Submit",
                     style: TextStyle(color: Colors.black),
