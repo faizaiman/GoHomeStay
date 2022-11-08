@@ -18,6 +18,10 @@ class _UserInput extends State<UserInput> {
   List listItem = ['House', 'Flat', 'Guest House', 'Hotel'];
   final _formKey = GlobalKey<FormState>();
   final FullName = TextEditingController();
+  final email = TextEditingController();
+  final phoneNum = TextEditingController();
+  final address = TextEditingController();
+
   final numGuest = TextEditingController();
   TextEditingController dateCheckin = TextEditingController();
   TextEditingController dateDepature = TextEditingController();
@@ -82,6 +86,7 @@ class _UserInput extends State<UserInput> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: address,
                     decoration: new InputDecoration(
                       hintText: "Chaah, Johor",
                       labelText: "Address",
@@ -95,6 +100,7 @@ class _UserInput extends State<UserInput> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: phoneNum,
                     keyboardType: TextInputType.phone,
                     decoration: new InputDecoration(
                       hintText: "01234567884",
@@ -110,6 +116,7 @@ class _UserInput extends State<UserInput> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: email,
                     keyboardType: TextInputType.emailAddress,
                     decoration: new InputDecoration(
                       hintText: "Aerif@gmail.com",
@@ -186,10 +193,14 @@ class _UserInput extends State<UserInput> {
                         MaterialPageRoute(builder: (context) {
                       return CheckoutPage(
                         homestay: widget.homestay,
+<<<<<<< Updated upstream
                         fullName: FullName.text,
                         dateCheckin: dateCheckin.text,
                         dateDeparture: dateDepature.text,
                         numGuest: numGuest.text,
+=======
+                        FullName: FullName.text,
+>>>>>>> Stashed changes
                       );
                     }));
                   },
