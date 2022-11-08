@@ -8,17 +8,33 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
   @override
   State<HomePage> createState() => _HomePageState();
+
+  final double width = 320;
+  final double height = 300;
 }
 
 class _HomePageState extends State<HomePage> {
   Widget buildHomeStay(Homestay homestay) {
     return Center(
-        child: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: 4,
+      child: Container(
+        width: 320,
+        height: 300,
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.only(bottom: 5, top: 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black87.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(1, 1),
+            )
+          ],
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.only(
@@ -27,25 +43,77 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Image(
                 image: AssetImage(homestay.thumbnailUrl),
-                height: 250,
+                height: 200,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.fill,
               ),
             ),
-            ListTile(
-              title: Text(
-                homestay.listingName,
-                style: TextStyle(fontSize: 16),
+            Container(
+              width: 260,
+              padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    homestay.listingName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xFF333333),
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        homestay.noRoom,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style:
+                            TextStyle(color: Color(0xFF8A8989), fontSize: 13),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "RM" + homestay.listingPrice.toString() + "/night",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Color(0xFFe6b56c),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 14,
+                        color: Color(0xFFffcb66),
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        homestay.ratings,
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ],
+                  )
+                ],
               ),
-              trailing: Text(
-                homestay.listingAddress,
-                style: TextStyle(fontSize: 10),
-              ),
-            )
+            ),
           ],
         ),
       ),
-    ));
+    );
   }
 
   @override
