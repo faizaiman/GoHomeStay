@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'homestay.dart';
 import 'homestaydetail.dart';
 import 'input.dart';
@@ -29,11 +30,15 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   int _sliderVal = 1;
-  static double finalPrice = 0;
   double discount = 0.5;
-  final formKey = GlobalKey<FormState>();
+  String inputDiscount = "";
+  TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    double finalPrice = 0;
+    inputDiscount == widget.homestay.discountCode
+        ? (finalPrice = widget.homestay.listingPrice * discount)
+        : (finalPrice = widget.homestay.listingPrice);
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -146,7 +151,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 onChanged: (newValue) {
                   setState(() {
                     _sliderVal = newValue.round();
-                    // finalPrice = widget.homestay.listingPrice * _sliderVal;
                   });
                 },
               ),
@@ -160,59 +164,40 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
               Container(
                 padding: const EdgeInsets.all(5.0),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: "Enter Discount Code"),
-                        validator: (value) {
-                          if (value != widget.homestay.discountCode ||
-                              value!.isEmpty) {
-                            return "Invalid";
-                          } else {
-                            return "Discount Code Accepted";
-                          }
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              calculatePrice();
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFF78ffd6)),
-                            child: const Text(
-                              "Apply Discount Code",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          Text(
-                            'Total Price: RM${finalPrice * _sliderVal}',
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      controller: textController,
+                      decoration: const InputDecoration(
+                          labelText: "Enter Discount Code"),
+                      onChanged: (value) {
+                        setState(() {
+                          inputDiscount = value;
+                        });
+                      },
+                    ),
+                    Text(
+                      'Total Price: RM${finalPrice * _sliderVal}',
+                    ),
+                    RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 0,
+                      direction: Axis.horizontal,
+                      allowHalfRating: false,
+                      itemCount: 5,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) =>
+                          const Icon(Icons.star, color: Colors.amber),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    )
+                  ],
                 ),
               ),
             ],
           ),
         ));
-  }
-
-  calculatePrice() {
-    // ignore: unused_local_variable
-    double price = 1.0;
-    if (formKey.currentState!.validate()) {
-      price = widget.homestay.listingPrice;
-    } else {
-      price = widget.homestay.listingPrice * discount;
-    }
-    setState(() => finalPrice = price);
   }
 }
