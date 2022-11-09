@@ -105,7 +105,9 @@ class _UserInput extends State<UserInput> {
                       if (val!.isEmpty) {
                         return "Required";
                       }
-                      if (!RegExp(r'^[0-20]+$').hasMatch(val)) {
+                      if (!RegExp(
+                              r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
+                          .hasMatch(val)) {
                         return 'Please enter a phone number';
                       }
                       return null;
@@ -161,7 +163,9 @@ class _UserInput extends State<UserInput> {
                       if (val!.isEmpty) {
                         return "Required";
                       }
-                      if (!RegExp(r'^[0-20]+$').hasMatch(val)) {
+                      if (!RegExp(
+                              r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$')
+                          .hasMatch(val)) {
                         return 'Please number only';
                       }
                       return null;
