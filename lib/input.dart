@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'checkout.dart';
 import 'homestay.dart';
@@ -139,7 +136,8 @@ class _UserInput extends State<UserInput> {
                       labelText: "Number of Guest",
                       icon: Icon(Icons.person),
                       border: UnderlineInputBorder(
-                          borderRadius: new BorderRadius.circular(5.0)),
+                        borderRadius: new BorderRadius.circular(5.0),
+                      ),
                     ),
                     validator: (val) => val!.isEmpty ? "Required" : null,
                   ),
@@ -153,8 +151,8 @@ class _UserInput extends State<UserInput> {
                     firstDate: DateTime.now(),
                     lastDate: DateTime(2100),
                     icon: Icon(Icons.event),
-                    dateLabelText: "Departure Date",
-                    timeLabelText: "Departure Time",
+                    dateLabelText: "Check-in Date",
+                    timeLabelText: "Check-in Time",
                     onChanged: (val) => print(val),
                     validator: (val) => val!.isEmpty ? "Required" : null,
                     onSaved: (val) => print(val),
@@ -179,8 +177,6 @@ class _UserInput extends State<UserInput> {
                 ElevatedButton(
                   onPressed: () {
                     if (!_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(content: Text("Error")));
                     } else {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -193,24 +189,9 @@ class _UserInput extends State<UserInput> {
                         );
                       }));
                     }
-<<<<<<< HEAD
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CheckoutPage(
-                        homestay: widget.homestay,
-                        fullName: FullName.text,
-                        dateCheckin: dateCheckin.text,
-                        dateDeparture: dateDepature.text,
-                        numGuest: numGuest.text,
-                      );
-                    }));
-=======
->>>>>>> origin/test
                   },
-                  style: ElevatedButton.styleFrom
-                  (
-                      backgroundColor: Color(0xFF78ffd6)
-                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF78ffd6)),
                   child: const Text(
                     "Submit",
                     style: TextStyle(color: Colors.black),

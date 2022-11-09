@@ -44,6 +44,7 @@ dependencies:
   date_time_picker: ^2.1.0
   flutter_fast_forms: ^9.0.0
   flutter_rating_bar: ^4.0.1
+  coupon_uikit: ^0.1.0
   ##flutter_native_splash: ^2.2.13
 
 
