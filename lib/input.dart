@@ -101,7 +101,15 @@ class _UserInput extends State<UserInput> {
                         borderRadius: new BorderRadius.circular(5.0),
                       ),
                     ),
-                    validator: (val) => val!.isEmpty ? "Required" : null,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Required";
+                      }
+                      if (!RegExp(r'^[0-20]+$').hasMatch(val)) {
+                        return 'Please enter a phone number';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(
@@ -116,7 +124,17 @@ class _UserInput extends State<UserInput> {
                         borderRadius: new BorderRadius.circular(5.0),
                       ),
                     ),
-                    validator: (val) => val!.isEmpty ? "Required" : null,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Required";
+                      }
+                      if (!RegExp(
+                              r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                          .hasMatch(val)) {
+                        return 'Please enter a valid Email';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(
@@ -139,7 +157,15 @@ class _UserInput extends State<UserInput> {
                         borderRadius: new BorderRadius.circular(5.0),
                       ),
                     ),
-                    validator: (val) => val!.isEmpty ? "Required" : null,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Required";
+                      }
+                      if (!RegExp(r'^[0-20]+$').hasMatch(val)) {
+                        return 'Please number only';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(

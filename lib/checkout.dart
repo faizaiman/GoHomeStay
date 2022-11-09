@@ -47,15 +47,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime dt1 = DateTime.parse(widget.dateCheckin);
-    DateTime dt2 = DateTime.parse(widget.dateDeparture);
-    Duration diff = dt1.difference(dt2);
-
-    double finalPrice = 0;
-    inputDiscount == widget.homestay.discountCode
-        ? (finalPrice = widget.homestay.listingPrice * discount)
-        : (finalPrice = widget.homestay.listingPrice);
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
